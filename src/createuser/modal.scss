@@ -1,0 +1,33 @@
+.a {
+
+  .form-group-1 {
+    display: flex;
+    justify-content: space-between;
+    .class {
+      width: 49% ;
+    }
+    .room {
+      width: 49%;
+    }
+  }
+  .form-group-2 {
+    display: flex;
+    justify-content: space-between;
+    .buoi {
+      width: 49% ;
+    }
+    .date {
+      width: 49%;
+    }
+  }
+  .form-group-3 {
+    display: flex;
+    justify-content: space-between;
+    .shift {
+      width: 49% ;
+    }
+    .time {
+      width: 49%;
+    }
+  }
+}

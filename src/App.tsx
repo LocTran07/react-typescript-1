@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./style/sb-admin-2.min.css";
 import "./App.css";
 // import Button from "@mui/material/Button";
@@ -14,11 +14,60 @@ import { Group, Button } from "@mantine/core";
 import { handleNoti } from "./notifi/notifi";
 import { AiFillAccountBook } from "react-icons/ai";
 import { Check } from "tabler-icons-react";
-
+import { collection, getDoc, getDocs } from "firebase/firestore/lite";
+import { db } from "./firebase";
+import { CollectionReference } from "firebase/firestore";
+import User from "./createuser/User";
+import { Checkbox } from "@mantine/core";
+import { randomId, useListState } from "@mantine/hooks";
+import CheckLisit from "./createuser/CheckLisit";
+import Table1 from "./createuser/Table1";
+import { DatePicker } from "antd";
+import { format } from "date-fns";
+interface User {
+  name: string;
+  age: number;
+}
+const initialValues = [
+  { label: "Receive email notifications", checked: false, key: randomId() },
+  { label: "Receive sms notifications", checked: false, key: randomId() },
+  { label: "Receive push notifications", checked: false, key: randomId() },
+];
 function App() {
+  //check all
+  const [values, handlers] = useListState(initialValues);
+
+  const allChecked = values.every((value) => value.checked);
+  const indeterminate = values.some((value) => value.checked) && !allChecked;
+
+  const items = values.map((value, index) => (
+    <Checkbox
+      ml={33}
+      label={value.label}
+      key={value.key}
+      checked={value.checked}
+      onChange={(event) =>
+        handlers.setItemProp(index, "checked", event.currentTarget.checked)
+      }
+    />
+  ));
+
+  // state
+  const [users, setUser] = useState<any>([]);
+  // coleection
+  const citiesCol = collection(db, "users");
+  // effect
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getDocs(citiesCol);
+      // console.log(data.docs.map((doc) => doc.data()));
+      setUser(data.docs.map((doc) => doc.data()));
+    };
+    getData();
+  }, []);
   return (
     <div className="App">
-      <Notifications  position="bottom-right"></Notifications>
+      <Notifications position="bottom-right"></Notifications>
       {/* 
       <MovieProvider>
         <ThemeContextProvider>
@@ -29,7 +78,7 @@ function App() {
           </ProgressContextProvider>
         </ThemeContextProvider>
       </MovieProvider> */}
-      <Group>
+      {/* <Group>
         <Button
           variant="outline"
           onClick={() => handleNoti("title", "message", "warning", 2000)}
@@ -37,8 +86,13 @@ function App() {
           test
         </Button>
         <AiFillAccountBook></AiFillAccountBook>
-      </Group>
+      </Group> */}
       {/* <Maintine></Maintine> */}
+      <User></User>
+      <CheckLisit></CheckLisit>
+      <div className="" style={{ maxWidth: 1800, margin: "auto" }}>
+        <Table1></Table1>
+      </div>
     </div>
   );
 }
