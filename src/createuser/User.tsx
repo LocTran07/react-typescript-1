@@ -23,8 +23,6 @@ import {
   IconBrandCashapp,
   IconBook,
 } from "@tabler/icons-react";
-import CheckLisit from "./CheckLisit";
-import { format } from "date-fns";
 
 const User = () => {
   const [opened, { open, close }] = useDisclosure(false);

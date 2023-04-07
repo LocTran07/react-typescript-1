@@ -20,7 +20,6 @@ import { CollectionReference } from "firebase/firestore";
 import User from "./createuser/User";
 import { Checkbox } from "@mantine/core";
 import { randomId, useListState } from "@mantine/hooks";
-import CheckLisit from "./createuser/CheckLisit";
 import Table1 from "./createuser/Table1";
 import { DatePicker } from "antd";
 import { format } from "date-fns";
@@ -33,12 +32,28 @@ const initialValues = [
   { label: "Receive sms notifications", checked: false, key: randomId() },
   { label: "Receive push notifications", checked: false, key: randomId() },
 ];
+
 function App() {
   //check all
   const [values, handlers] = useListState(initialValues);
 
   const allChecked = values.every((value) => value.checked);
   const indeterminate = values.some((value) => value.checked) && !allChecked;
+
+  React.useEffect(() => {
+    setCookie();
+  }, []);
+
+  function setCookie() {
+    const name = "gledu";
+    const value =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTMsIkVudGl0eUNvZGUiOjEsImV4cCI6MTY4MTExNDg0M30.PqN_i2maE0E2wSqxtGL0XiEuDcTOzb9Pf53HUwwawVw";
+    const expires = new Date();
+    expires.setTime(expires.getTime() + 1 * 24 * 60 * 60 * 1000);
+    const cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;domain=localhost`;
+    document.cookie = cookie;
+    
+  }
 
   const items = values.map((value, index) => (
     <Checkbox
@@ -88,9 +103,8 @@ function App() {
         <AiFillAccountBook></AiFillAccountBook>
       </Group> */}
       {/* <Maintine></Maintine> */}
-      <User></User>
-      <CheckLisit></CheckLisit>
-      <div className="" style={{ maxWidth: 1800, margin: "auto" }}>
+      {/* <User></User> */}
+      <div className="" style={{ maxWidth: 2000, margin: "auto" }}>
         <Table1></Table1>
       </div>
     </div>
