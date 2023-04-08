@@ -1,142 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { Button } from "@mantine/core";
 import ModalAntd from "./ModalAntd";
 import _ from "lodash";
-import CreateTable from "./CreateTable";
-import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
-import { eachDayOfInterval, format } from "date-fns";
-
-const data1 = [
-  {
-    id: "123",
-    className: "STA-C",
-    info: "9:30 - 11:00",
-    roomCode: "T7, CN",
-    price: -600000,
-    reportId: ["9656c7d3-c378-48b6-9179-b032236548ab"],
-    items: null,
-    users: [],
-  },
-  {
-    id: "1234",
-    className: "STA-B",
-    info: "18:00 - 19:30",
-    roomCode: "3,5",
-    price: -600000,
-    reportId: ["dcf9a69a-2eed-47ac-876b-8978a36bc6a8"],
-    items: [
-      {
-        itemId: "edbf1612-9f10-4538-be12-0ab8817f1f07",
-        itemName: "STARTERS SUCCEED",
-        isInWaitingRoom: false,
-        description: "",
-        itemType: {
-          itemTypeId: "2",
-          itemTypeName: "Books",
-          description: "",
-        },
-        discountPercentage: 0,
-        discountAmount: 0,
-        basePrice: -150000,
-        quantity: 0,
-        personIdAssigningDiscount: 0,
-        recurringDay: 0,
-        dateAssignedToUser: 0,
-        dateCreated: 1666777932,
-        dateUpdated: 0,
-      },
-    ],
-    users: [],
-  },
-];
-
-const data2 = [
-  {
-    classId: "123",
-    actions: [
-      {
-        roomId: 12,
-        time: {
-          fromTime: 1930,
-          toTime: 2100,
-          weekDate: 1,
-        },
-        title: "",
-        note: "",
-        participants: [4],
-        participantsFullName: ["Cao Duy Minh"],
-      },
-      {
-        roomId: 11,
-        time: {
-          fromTime: 1930,
-          toTime: 2100,
-          weekDate: 3,
-        },
-        title: "",
-        note: "",
-        participants: [4],
-        participantsFullName: ["Cao Duy Minh"],
-      },
-      {
-        roomId: 11,
-        time: {
-          fromTime: 1930,
-          toTime: 2100,
-          weekDate: 5,
-        },
-        title: "",
-        note: "",
-        participants: [18],
-        participantsFullName: ["Thắng Cao Duy"],
-      },
-    ],
-  },
-  {
-    classId: "1234",
-    actions: [
-      {
-        roomId: 5,
-        time: {
-          fromTime: 1800,
-          toTime: 1930,
-          weekDate: 1,
-        },
-        title: "",
-        note: "",
-        participants: [34],
-        participantsFullName: ["Kenneth Trần"],
-      },
-      {
-        roomId: 5,
-        time: {
-          fromTime: 1800,
-          toTime: 1930,
-          weekDate: 3,
-        },
-        title: "",
-        note: "",
-        participants: [9],
-        participantsFullName: ["Trần Phan Quỳnh Như"],
-      },
-      {
-        roomId: 5,
-        time: {
-          fromTime: 1800,
-          toTime: 1930,
-          weekDate: 5,
-        },
-        title: "",
-        note: "",
-        participants: [34],
-        participantsFullName: ["Kenneth Trần"],
-      },
-    ],
-  },
-];
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { Button } from "@mantine/core";
 
 const Table1: React.FC = () => {
   // react query
@@ -222,21 +90,10 @@ const Table1: React.FC = () => {
     datanew: A[];
   }
   const [dataAddNew, setDataAddNew] = useState<DataAddNew | null>(null);
-
-  const [b, setB] = useState<any[] | []>([]);
   const [c, setC] = useState(null);
-  // const [a, setA] = useState<any>([]);
-
   const [changed, setChanged] = React.useState(false);
   const [changedInner, setChangedInner] = React.useState(false);
-
   const [arrIndex, setIndex] = React.useState(-1);
-  // console.log('arrat:', arrIndex);
-
-  // if (changed) {
-  //   setArr
-  // }
-
   // interface
   interface B {
     participantsFullName: string[];
@@ -329,7 +186,6 @@ const Table1: React.FC = () => {
   // xử lý dữ lieuj
   const data3 = a?.map((item: any, index: number) => {
     mappingA[item.classId] = index;
-    // console.log('mappinga' , mappingA);
 
     const data = { ...item, id: item.classId };
     return data;
@@ -341,9 +197,9 @@ const Table1: React.FC = () => {
     (objValue, srcValue) =>
       _.isObject(objValue) ? _.merge(objValue, srcValue) : srcValue
   );
-   const arr = _.values(merged);
+  const arr = _.values(merged);
 
-    // colunm datta
+  // colunm datta
   const columns: ColumnsType<any> = [
     {
       title: "Tên lớp",
@@ -358,8 +214,7 @@ const Table1: React.FC = () => {
             filterArr={c}
             setChanged={setChanged}
             setArr={setC}
-            arrData = {arr}
-
+            arrData={arr}
           ></ModalAntd>
         );
       },
@@ -416,8 +271,7 @@ const Table1: React.FC = () => {
             filterArr={c}
             setChanged={setChanged}
             setArr={setC}
-            arrData = {arr}
-
+            arrData={arr}
           ></ModalAntd>
         );
       },
@@ -448,8 +302,7 @@ const Table1: React.FC = () => {
             filterArr={c}
             setChanged={setChanged}
             setArr={setC}
-            arrData = {arr}
-
+            arrData={arr}
           ></ModalAntd>
         );
       },
@@ -476,8 +329,7 @@ const Table1: React.FC = () => {
             filterArr={c}
             setChanged={setChanged}
             setArr={setC}
-            arrData = {arr}
-
+            arrData={arr}
           ></ModalAntd>
         );
       },
@@ -509,8 +361,7 @@ const Table1: React.FC = () => {
             filterArr={c}
             setChanged={setChanged}
             setArr={setC}
-            arrData = {arr}
-
+            arrData={arr}
           ></ModalAntd>
         );
       },
@@ -537,8 +388,7 @@ const Table1: React.FC = () => {
             filterArr={c}
             setChanged={setChanged}
             setArr={setC}
-            arrData = {arr}
-
+            arrData={arr}
           ></ModalAntd>
         );
       },
@@ -563,8 +413,7 @@ const Table1: React.FC = () => {
             filterArr={c}
             setChanged={setChanged}
             setArr={setC}
-            arrData = {arr}
-
+            arrData={arr}
           ></ModalAntd>
         );
       },
@@ -591,8 +440,7 @@ const Table1: React.FC = () => {
             filterArr={c}
             setChanged={setChanged}
             setArr={setC}
-            arrData = {arr}
-
+            arrData={arr}
           ></ModalAntd>
         );
       },
@@ -618,8 +466,7 @@ const Table1: React.FC = () => {
             filterArr={c}
             setChanged={setChanged}
             setArr={setC}
-            arrData = {arr}
-
+            arrData={arr}
           ></ModalAntd>
         );
       },
@@ -645,8 +492,7 @@ const Table1: React.FC = () => {
             filterArr={c}
             setChanged={setChanged}
             setArr={setC}
-            arrData = {arr}
-
+            arrData={arr}
           ></ModalAntd>
         );
       },
@@ -690,23 +536,27 @@ const Table1: React.FC = () => {
 
   // useeffect
 
+  // clone dữ liệu từ thằng a để gửi lên server
+  let cloneA = JSON.parse(JSON.stringify(a));
+  const oj = {
+    entities: cloneA,
+  };
+
+  const postData = async (a: typeof cloneA) => {
+    const res1 = await fetch("http://localhost:8080/api/v1/schedule/rules", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ entities: a }),
+    });
+
+  };
+  const { mutate } = useMutation(["postData"],postData,{onSuccess: ()=> {alert(123)}});
   return (
     <div>
-      {/* <div style={{ marginTop: "20px", marginBottom: "20px" }}>
-        <CreateTable fun={handleNewTable}></CreateTable>
-      </div>
-      <div style={{ marginTop: "20px", marginBottom: "20px" }}>
-        <Button onClick={() => {}}>Cập nhật</Button>
-      </div>
-      <div style={{ marginTop: "20px", marginBottom: "20px" }}>
-        <Button
-          onClick={() => {
-            setB(arr);
-          }}
-        >
-          Quay lại
-        </Button>
-      </div> */}
+      <Button onClick={() => {mutate(cloneA)}}>Cập nhật thay đổi</Button>
       <Table
         style={{ fontSize: 18 }}
         columns={columns}
@@ -716,9 +566,6 @@ const Table1: React.FC = () => {
         onRow={(record, rowIndex) => {
           return {
             onClick: () => {
-              // setIndex(mappingA[record.classId]);
-              // setC(record)
-              // !changed && !c
               if (!changed && !c) {
                 setC(record);
                 setIndex(mappingA[record.classId]);

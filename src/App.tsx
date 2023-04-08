@@ -17,7 +17,7 @@ import { Check } from "tabler-icons-react";
 import { collection, getDoc, getDocs } from "firebase/firestore/lite";
 import { db } from "./firebase";
 import { CollectionReference } from "firebase/firestore";
-import User from "./createuser/User";
+import User from "./createusercopy/User";
 import { Checkbox } from "@mantine/core";
 import { randomId, useListState } from "@mantine/hooks";
 import Table1 from "./createuser/Table1";

@@ -5,16 +5,12 @@ import "./modal.scss";
 import {
   Group,
   Select,
-  TextInput,
   Button,
   Input,
-  InputBase,
 } from "@mantine/core";
 import _ from "lodash";
 import { useForm } from "@mantine/form";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { IMaskInput } from "react-imask";
-import { log } from "console";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface A {
   room?: string;
@@ -127,8 +123,6 @@ const ModalAntd = ({
   const [arrTime, setArrTime] = useState<any>([]);
   const [arrGv, setArrGv] = useState<any>([]);
   const [valueTime, setValueTime] = useState<any>("");
-console.log('gv',arrGv );
-console.log('time',arrTime );
 
 
   // handle edit
