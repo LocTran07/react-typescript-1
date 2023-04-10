@@ -67,11 +67,11 @@ const Timetableversion2: React.FC = () => {
       });
     return res1;
   };
-  const [a, setA] = useState<any>([]);
+  const [dataFetchTkb, setdataFetchTkb] = useState<any>([]);
 
   const { data: dataTKB } = useQuery(["dataTKB"], () => {
     getDataTkb().then((res) => {
-      setA(res);
+      setdataFetchTkb(res);
     });
     return getDataTkb();
   });
@@ -184,7 +184,7 @@ const Timetableversion2: React.FC = () => {
   const mappingA: { [key: string]: number } = {};
 
   // xử lý dữ lieuj
-  const data3 = a?.map((item: any, index: number) => {
+  const data3 = dataFetchTkb?.map((item: any, index: number) => {
     mappingA[item.classId] = index;
 
     const data = { ...item, id: item.classId };
@@ -227,34 +227,38 @@ const Timetableversion2: React.FC = () => {
         let a = "";
         if (item.actions) {
           if (item.actions[0].roomId == 1) {
-            a = "A1.1";
+            a = "A.1.1";
           } else if (item.actions[0].roomId == 2) {
-            a = "A1.2";
+            a = "A.1.2";
           } else if (item.actions[0].roomId == 3) {
-            a = "A1.3";
+            a = "A.1.3";
           } else if (item.actions[0].roomId == 4) {
-            a = "A1.4";
+            a = "A.1.4";
           } else if (item.actions[0].roomId == 5) {
-            a = "A1.5";
+            a = "A.2.1";
           } else if (item.actions[0].roomId == 6) {
-            a = "B1.1";
+            a = "A.2.2";
           } else if (item.actions[0].roomId == 7) {
-            a = "B1.2";
+            a = "A.2.3";
           } else if (item.actions[0].roomId == 8) {
-            a = "B1.3";
+            a = "A.2.4";
           } else if (item.actions[0].roomId == 9) {
-            a = "B1.4";
+            a = "B.1.1";
           } else if (item.actions[0].roomId == 10) {
-            a = "C1.1";
+            a = "B.1.2";
           } else if (item.actions[0].roomId == 11) {
-            a = "C1.2";
+            a = "B.1.3";
           } else if (item.actions[0].roomId == 12) {
-            a = "C1.3";
+            a = "B.1.4";
           } else if (item.actions[0].roomId == 13) {
-            a = "C1.4";
-          } else {
-            a = "C1.5";
-          }
+            a = "C1.1";
+          } else if (item.actions[0].roomId == 14) {
+            a = "C.1.2";
+          } else if (item.actions[0].roomId == 15) {
+            a = "C.1.3";
+          } else if (item.actions[0].roomId == 16) {
+            a = "C.1.4";
+          } 
         }
         // if (item.actions) {
         //   for (let i of item.actions) {
@@ -504,7 +508,7 @@ const Timetableversion2: React.FC = () => {
     // console.log("-aa---aaa---aa");
 
     // const filterArr =  JSON.parse(JSON.stringify(a));
-    const filterArr = JSON.parse(JSON.stringify(a));
+    const filterArr = JSON.parse(JSON.stringify(dataFetchTkb));
     filterArr[arrIndex] = c;
 
     console.log("asdasd0", dataAddNew);
@@ -529,7 +533,7 @@ const Timetableversion2: React.FC = () => {
       }
     }
 
-    setA(filterArr);
+    setdataFetchTkb(filterArr);
     setChanged(false);
     setC(null);
   }
@@ -537,9 +541,9 @@ const Timetableversion2: React.FC = () => {
   // useeffect
 
   // clone dữ liệu từ thằng a để gửi lên server
-  let cloneA = JSON.parse(JSON.stringify(a));
+  let cloneDataFetchTkb = JSON.parse(JSON.stringify(dataFetchTkb));
 
-  const postData = async (a: typeof cloneA) => {
+  const postData = async (a: typeof cloneDataFetchTkb) => {
     const res1 = await fetch("http://localhost:8080/api/v1/schedule/rules", {
       method: "POST",
       credentials: "include",
@@ -553,7 +557,7 @@ const Timetableversion2: React.FC = () => {
   const { mutate } = useMutation(["postData"],postData,{});
   return (
     <div>
-      <Button onClick={() => {mutate(cloneA)}}>Cập nhật thay đổi</Button>
+      <Button onClick={() => {mutate(cloneDataFetchTkb)}}>Cập nhật thay đổi</Button>
       <Table
         style={{ fontSize: 18 }}
         columns={columns}

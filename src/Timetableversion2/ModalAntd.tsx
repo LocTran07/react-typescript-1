@@ -2,12 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "antd";
 import "./style.scss";
 import "./modal.scss";
-import {
-  Group,
-  Select,
-  Button,
-  Input,
-} from "@mantine/core";
+import { Group, Select, Button, Input } from "@mantine/core";
 import _ from "lodash";
 import { useForm } from "@mantine/form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -123,7 +118,6 @@ const ModalAntd = ({
   const [arrTime, setArrTime] = useState<any>([]);
   const [arrGv, setArrGv] = useState<any>([]);
   const [valueTime, setValueTime] = useState<any>("");
-
 
   // handle edit
   const handleEditRoom = (e: string | null, index: number) => {
@@ -362,7 +356,6 @@ const ModalAntd = ({
       return item.fromTime == valueTime;
     });
 
-
     // map để tạo r data truyền select
     const resultGv1 = resultGv0.map((item: any) => {
       return {
@@ -460,32 +453,36 @@ const ModalAntd = ({
                           disabled
                           value={
                             a.roomId == 1
-                              ? "A1.1"
+                              ? "A.1.1"
                               : a.roomId == 2
-                              ? "A1.2"
+                              ? "A.1.2"
                               : a.roomId == 3
-                              ? "A1.3"
+                              ? "A.1.3"
                               : a.roomId == 4
-                              ? "A1.4"
+                              ? "A.1.4"
                               : a.roomId == 5
-                              ? "A1.5"
+                              ? "A.2.1"
                               : a.roomId == 6
-                              ? "B1.1"
+                              ? "A.2.2"
                               : a.roomId == 7
-                              ? "B1.2"
+                              ? "A.2.3"
                               : a.roomId == 8
-                              ? "B1.3"
+                              ? "A.2.4"
                               : a.roomId == 9
-                              ? "B1.4"
+                              ? "B.1.1"
                               : a.roomId == 10
-                              ? "C1.1"
+                              ? "B.1.2"
                               : a.roomId == 11
-                              ? "C1.2"
+                              ? "B.1.3"
                               : a.roomId == 12
-                              ? "C1.3"
+                              ? "B.1.4"
                               : a.roomId == 13
-                              ? "C1.4"
-                              : "C1.5"
+                              ? "C.1.1"
+                              : a.roomId == 14
+                              ? "C.1.2"
+                              : a.roomId == 15
+                              ? "C.1.3"
+                              : "C.1.4"
                           }
                         ></Input>
                       </div>
@@ -570,21 +567,23 @@ const ModalAntd = ({
                           defaultValue={a.roomId.toString()}
                           className="room"
                           placeholder="Phòng học"
-                          data={[
-                            { value: "1", label: "A1.1" },
-                            { value: "2", label: "A1.2" },
-                            { value: "3", label: "A1.3" },
-                            { value: "4", label: "A1.4" },
-                            { value: "5", label: "A1.5" },
-                            { value: "6", label: "B1.1" },
-                            { value: "7", label: "B1.2" },
-                            { value: "8", label: "B1.3" },
-                            { value: "9", label: "B1.4" },
-                            { value: "10", label: "C1.1" },
-                            { value: "11", label: "C1.2" },
-                            { value: "12", label: "C1.3" },
-                            { value: "13", label: "C1.4" },
-                            { value: "14", label: "C1.5" },
+                          data={ [
+                            { label: "A.1.1", value: "1" },
+                            { label: "A.1.2", value: "2" },
+                            { label: "A.1.3", value: "3" },
+                            { label: "A.1.4", value: "4" },
+                            { label: "A.2.1", value: "5" },
+                            { label: "A.2.2", value: "6" },
+                            { label: "A.2.3", value: "7" },
+                            { label: "A.2.4", value: "8" },
+                            { label: "B.1.1", value: "9" },
+                            { label: "B.1.2", value: "10" },
+                            { label: "B.1.3", value: "11" },
+                            { label: "B.1.4", value: "12" },
+                            { label: "C.1.1", value: "13" },
+                            { label: "C.1.2", value: "14" },
+                            { label: "C.1.3", value: "15" },
+                            { label: "C.1.4", value: "16" },
                           ]}
                           // value={valueGender}
                           // onChange={setValueGender}
@@ -752,21 +751,23 @@ const ModalAntd = ({
                         withAsterisk
                         className="room"
                         placeholder="Phòng học"
-                        data={[
-                          { value: "1", label: "A1.1" },
-                          { value: "2", label: "A1.2" },
-                          { value: "3", label: "A1.3" },
-                          { value: "4", label: "A1.4" },
-                          { value: "5", label: "A1.5" },
-                          { value: "6", label: "B1.1" },
-                          { value: "7", label: "B1.2" },
-                          { value: "8", label: "B1.3" },
-                          { value: "9", label: "B1.4" },
-                          { value: "10", label: "C1.1" },
-                          { value: "11", label: "C1.2" },
-                          { value: "12", label: "C1.3" },
-                          { value: "13", label: "C1.4" },
-                          { value: "14", label: "C1.5" },
+                        data={ [
+                          { label: "A.1.1", value: "1" },
+                          { label: "A.1.2", value: "2" },
+                          { label: "A.1.3", value: "3" },
+                          { label: "A.1.4", value: "4" },
+                          { label: "A.2.1", value: "5" },
+                          { label: "A.2.2", value: "6" },
+                          { label: "A.2.3", value: "7" },
+                          { label: "A.2.4", value: "8" },
+                          { label: "B.1.1", value: "9" },
+                          { label: "B.1.2", value: "10" },
+                          { label: "B.1.3", value: "11" },
+                          { label: "B.1.4", value: "12" },
+                          { label: "C.1.1", value: "13" },
+                          { label: "C.1.2", value: "14" },
+                          { label: "C.1.3", value: "15" },
+                          { label: "C.1.4", value: "16" },
                         ]}
                         required
                       />
