@@ -6,7 +6,7 @@ import _ from "lodash";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@mantine/core";
 
-const Table1: React.FC = () => {
+const Timetableversion2: React.FC = () => {
   // react query
   // useqery
   const getDataGv = async () => {
@@ -538,9 +538,6 @@ const Table1: React.FC = () => {
 
   // clone dữ liệu từ thằng a để gửi lên server
   let cloneA = JSON.parse(JSON.stringify(a));
-  const oj = {
-    entities: cloneA,
-  };
 
   const postData = async (a: typeof cloneA) => {
     const res1 = await fetch("http://localhost:8080/api/v1/schedule/rules", {
@@ -553,7 +550,7 @@ const Table1: React.FC = () => {
     });
 
   };
-  const { mutate } = useMutation(["postData"],postData,{onSuccess: ()=> {alert(123)}});
+  const { mutate } = useMutation(["postData"],postData,{});
   return (
     <div>
       <Button onClick={() => {mutate(cloneA)}}>Cập nhật thay đổi</Button>
@@ -578,4 +575,4 @@ const Table1: React.FC = () => {
   );
 };
 
-export default Table1;
+export default Timetableversion2;

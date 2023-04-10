@@ -20,7 +20,7 @@ import { CollectionReference } from "firebase/firestore";
 import User from "./createusercopy/User";
 import { Checkbox } from "@mantine/core";
 import { randomId, useListState } from "@mantine/hooks";
-import Table1 from "./createuser/Table1";
+import Timetableversion2 from "./Timetableversion2/Timetableversion2";
 import { DatePicker } from "antd";
 import { format } from "date-fns";
 interface User {
@@ -105,7 +105,7 @@ function App() {
       {/* <Maintine></Maintine> */}
       {/* <User></User> */}
       <div className="" style={{ maxWidth: 2000, margin: "auto" }}>
-        <Table1></Table1>
+        <Timetableversion2></Timetableversion2>
       </div>
     </div>
   );
